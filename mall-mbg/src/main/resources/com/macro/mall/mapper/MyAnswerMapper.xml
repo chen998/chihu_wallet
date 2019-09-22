@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.MyAnswerMapper">
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.MyAnswer">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="que_id" jdbcType="VARCHAR" property="queId" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="my_answer" jdbcType="VARCHAR" property="myAnswer" />
+        <result column="is_right" jdbcType="VARCHAR" property="isRight" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, member_id, que_id, create_time, my_answer, is_right
+  </sql>
+    <insert id="insert" parameterType="com.macro.mall.model.MyAnswer">
+
+        insert into myanswer (id, member_id, que_id, create_time, my_answer, is_right)
+        values (#{id,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, #{queId,jdbcType=VARCHAR},
+        #{createTime,jdbcType=VARCHAR}, #{myAnswer,jdbcType=VARCHAR}, #{isRight,jdbcType=VARCHAR}
+        )
+    </insert>
+
+</mapper>

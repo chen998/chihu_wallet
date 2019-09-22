@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.QuetionsMapper">
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.Questions">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="que_type" jdbcType="INTEGER" property="queType" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="que_a" jdbcType="VARCHAR" property="queA" />
+        <result column="que_b" jdbcType="VARCHAR" property="queB" />
+        <result column="que_c" jdbcType="VARCHAR" property="queC" />
+        <result column="que_d" jdbcType="VARCHAR" property="queD" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="money" jdbcType="INTEGER" property="money" />
+    </resultMap>
+  <sql id="Base_Column_List">
+    id, content, que_type, answer, que_a, que_b, que_c, que_d, create_time,money
+  </sql>
+    <insert id="insert" parameterType="com.macro.mall.model.Questions">
+    insert into questions (id, content, que_type, answer, que_a, que_b, que_c, que_d, create_time,money)
+    values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{queType,jdbcType=INTEGER},
+      #{answer,jdbcType=VARCHAR}, #{queA,jdbcType=VARCHAR}, #{queB,jdbcType=INTEGER},
+      #{queC,jdbcType=TIMESTAMP}, #{queD,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
+      #{money,jdbcType=INTEGER})
+    </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from questions
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.Questions">
+        update questions
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="queType != null">
+                que_type = #{queType,jdbcType=INTEGER},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="queA != null">
+                que_a = #{queA,jdbcType=VARCHAR},
+            </if>
+            <if test="queB != null">
+                que_b = #{queB,jdbcType=VARCHAR},
+            </if>
+            <if test="queC != null">
+                que_c = #{queC,jdbcType=VARCHAR},
+            </if>
+            <if test="queD != null">
+                que_d = #{queD,jdbcType=VARCHAR},
+            </if>
+            create_time =  now(),
+            <if test="money != null">
+                money = #{money,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectAllQues" resultType="com.macro.mall.model.Questions" parameterType="hashmap">
+    select
+        <include refid="Base_Column_List" />
+        from questions
+        order by create_time desc
+    </select>
+</mapper>
